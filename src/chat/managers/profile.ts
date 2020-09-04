@@ -7,7 +7,7 @@ import { WebSocketWrapper } from './../index';
 export class ProfileManager {
 
 	//
-	// ─── PROFIEL ────────────────────────────────────────────────────────────────────
+	// ─── PROFILE ────────────────────────────────────────────────────────────────────
 	//
 	private profile: UserInfo;
 	
