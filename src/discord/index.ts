@@ -96,6 +96,22 @@ export class DiscordService {
 						}
 
 						break;
+					
+					case 'cheaters':
+
+						const cheaters = await PlayerModel.find({tags: 'cheater'}).lean();
+
+						const embed = new MessageEmbed()
+							.setColor('#0099ff')
+							.setTitle('Cheater query')
+							.setDescription(`${cheaters.length} cheaters were found in total.\n${
+								cheaters.map((info, i) => `${i+1}. ${info.aliases.join(', ').slice(0, 20)}<${info._id}>`).join('\n')
+							}`)
+							.setTimestamp()
+
+						message.channel.send(embed);
+
+						break;
 
 					case 'cheat':
 
