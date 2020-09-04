@@ -50,7 +50,7 @@ export class DiscordService {
 									.setDescription(`this user has total ${info.aliases.length} aliases, ${info.skinUrls.length} skins, ${info.trip1.length} IP Addresses and ${info.trip2.length} devices.`)
 									.addField('id', info._id)
 									.addField('aliases', info.aliases.map((e, i) => `${i+1}. ${e}`).join('\n'))
-									.addField('skins', info.skinUrls.slice(0, 10).map((e, i) => `${i+1}. ${e.slice(0, 20)}`).join('\n'))
+									.addField('skins', info.skinUrls.slice(0, 10).map((e, i) => `${i+1}. ${e.slice(0, 30)}`).join('\n'))
 									.addField('trips of IP Addresses', info.trip1.map((e, i) => `${i+1}. ${e}`).join('\n'))
 									.addField('trips of cookies', info.trip2.map((e, i) => `${i+1}. ${e}`).join('\n'))
 									.addField('is cheating', info.tags.includes('cheater'))
