@@ -2,6 +2,7 @@ import { findPlayerByFullTrip } from './../../utils/db';
 import { Socket, SocketConstructor } from "../context";
 import { getName } from 'country-list';
 import { env } from '../../utils/env';
+import config from '../../../config.json';
 
 export class Interval implements Socket {
 	constructor(private options: SocketConstructor) {}
@@ -19,7 +20,11 @@ export class Interval implements Socket {
 						const geo = this.options.playerManager.getCheaters().get(player.userId);
 
 						// broadcast
-						this.options.messageManager.broadcast(`dear all, cheater '${player.name}'(${player.fullTrip}) from ${getName(geo.country)}, ${geo.city} is in-game.`);
+						if (geo) {
+							this.options.messageManager.broadcast(`dear all, cheater '${player.name}'(${player.fullTrip}) who from ${getName(geo.country)}, ${geo.city} is currently in-game.`);
+						} else {
+							this.options.messageManager.broadcast(`dear all, cheater '${player.name}'(${player.fullTrip}) is currently in-game.`);
+						}
 					} else {
 						const ip = env.IX_AGAR_STAT_ENDPOINT;
 
@@ -30,7 +35,7 @@ export class Interval implements Socket {
 						});
 
 						// ip tracking
-						this.options.messageManager.message(player.userId, `hello.`);
+						this.options.messageManager.message(player.userId, config.message.cheat);
 					}
 				}
 			});
