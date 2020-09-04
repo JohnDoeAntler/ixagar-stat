@@ -116,11 +116,13 @@ export class DiscordService {
 					case 'cheat':
 
 						try {
+							const target = await PlayerModel.findById(args[0]).lean();
+
 							const status = await PlayerModel.findByIdAndUpdate(args[0], {
-								$addToSet: {
+								[target.tags.includes('cheater') ? '$pull' : '$addToSet']: {
 									tags: 'cheater'
 								},
-							}, {new: true});
+							});
 
 							message.channel.send(`user '${status.aliases[0]}'<${args[0]}> has been tagged as cheater.`);
 						} catch (e) {
