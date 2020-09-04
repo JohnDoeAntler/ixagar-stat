@@ -15,13 +15,23 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 	//
 	// ─── IP TRACKING ────────────────────────────────────────────────────────────────
 	//
-	const ip = req.connection.remoteAddress.split(":").pop();
+	const fwd = req.headers['x-forwarded-for'] as string;
+
+	let ip: string;
+
+	if (fwd) {
+		const list = fwd.split(',');
+		ip = list.pop();
+	} else {
+		ip = req.connection.remoteAddress.split(":").pop()
+	}
+
 	const geo = geoip.lookup(ip);
 
 	//
 	// ─── LOGGING ────────────────────────────────────────────────────────────────────
 	//
-	logger.verbose(`userId: ${userId}, IP address: ${ip}${geo && `, country: ${geo.country}, region: ${geo.region}, city: ${geo.city}` || ''}.`);
+	logger.info(`userId: ${userId}, IP address: ${ip}${geo && `, country: ${geo.country}, region: ${geo.region}, city: ${geo.city}` || ''}.`);
 
 	const server = serverHandler.getServers().get(serverSig as string);
 	const cheater = server.playerManager.getPlayers().get(parseInt(userId as string));
