@@ -47,12 +47,10 @@ export class DiscordService {
 								const embed = new MessageEmbed()
 									.setColor('#0099ff')
 									.setTitle('User query')
-									.setAuthor(info.aliases[0], info.skinUrls[0], info.skinUrls[0])
-									.setThumbnail(info.skinUrls[0])
 									.setDescription(`this user has total ${info.aliases.length} aliases, ${info.skinUrls.length} skins, ${info.trip1.length} IP Addresses and ${info.trip2.length} devices.`)
 									.addField('id', info._id)
 									.addField('aliases', info.aliases.map((e, i) => `${i+1}. ${e}`).join('\n'))
-									.addField('skins', info.skinUrls.map((e, i) => `${i+1}. ${e}`).join('\n'))
+									.addField('skins', info.skinUrls.slice(10).map((e, i) => `${i+1}. ${e.slice(0,40)}`).join('\n'))
 									.addField('trips of IP Addresses', info.trip1.map((e, i) => `${i+1}. ${e}`).join('\n'))
 									.addField('trips of cookies', info.trip2.map((e, i) => `${i+1}. ${e}`).join('\n'))
 									.addField('is cheating', info.tags.includes('cheater'))
@@ -124,7 +122,7 @@ export class DiscordService {
 								},
 							});
 
-							message.channel.send(`user '${status.aliases[0]}'<${args[0]}> has been tagged as cheater.`);
+							message.channel.send(`user '${status.aliases[0]}'<${args[0]}> has been ${target ? 'un' : ''}tagged as cheater.`);
 						} catch (e) {
 							message.channel.send('no user was found.');
 						}
