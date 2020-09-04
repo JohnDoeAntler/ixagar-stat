@@ -121,7 +121,7 @@ export class DiscordService {
 								},
 							});
 
-							message.channel.send(`user '${status.aliases[0]}'<${args[0]}> has been ${target ? 'un' : ''}tagged as cheater.`);
+							message.channel.send(`user '${status.aliases[0]}'<${args[0]}> has been ${target.tags.includes('cheater') ? 'un' : ''}tagged as cheater.`);
 						} catch (e) {
 							message.channel.send('no user was found.');
 						}
