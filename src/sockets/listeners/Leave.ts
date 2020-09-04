@@ -13,7 +13,11 @@ export class Leave implements Socket {
 
 			logger.verbose(`user '${user.name}'<${user.fullTrip}> has disconnected from the server '${serverSig}'.`);
 
-			await updateLastActive(user);
+			const info = await updateLastActive(user);
+
+			if (info.tags.includes('cheater')) {
+				this.options.messageManager.broadcast(`cheater '${user.name}'(${user.fullTrip}) has disconnected from the server.`);
+			}
 		});
 	}
 }

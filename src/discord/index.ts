@@ -20,6 +20,8 @@ export class DiscordService {
 		});
 
 		this.client.on('message', async (message) => {
+			if (message.author.id !== env.IX_AGAR_STAT_DISCORD_OWNER_ID) return;
+
 			if (message.content.startsWith('!')) {
 				const args = message.content.slice(1).split(' ');
 				const command = args.shift();

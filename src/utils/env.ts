@@ -21,6 +21,10 @@ class EnvironmentalVariable {
 		process.env.IX_AGAR_STAT_CHAT_SERVERSIG?.split(',') || [];
 	IX_AGAR_STAT_DISCORD_TOKEN: string =
 		process.env.IX_AGAR_STAT_DISCORD_TOKEN || '';
+	IX_AGAR_STAT_DISCORD_OWNER_ID: string =
+		process.env.IX_AGAR_STAT_DISCORD_OWNER_ID || '';
+	IX_AGAR_STAT_ENDPOINT: string =
+		process.env.IX_AGAR_STAT_ENDPOINT || '';
 }
 
 export const env = new EnvironmentalVariable();

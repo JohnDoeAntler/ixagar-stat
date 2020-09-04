@@ -1,15 +1,16 @@
+import { ChatServerHandler } from './../sockets/index';
 import express from 'express';
 import { router } from '../routes';
 import { logger } from '../utils/logger';
 import { env } from '../utils/env';
 
-class Express {
+export class ExpressService {
 
 	private server: express.Express;
 
-	constructor() {
+	constructor(private serverHandler: ChatServerHandler) {
 		this.server = express();
-		this.server.use(router());
+		this.server.use(router(serverHandler));
 	}
 
 	async run() {
@@ -21,5 +22,3 @@ class Express {
 	}
 
 }
-
-export const server = new Express();

@@ -1,6 +1,9 @@
 {
 	"profile": {
 		"name": "ixagar-stat",
-		"description": "Hello world."
+		"description": "any feedbacks, join https://discord.gg/C7fySHm"
+	},
+	"message": {
+		"cheat": "you has been marked as cheater, if it is a false accusation, goto https://discord.gg/C7fySHm and report."
 	}
 }

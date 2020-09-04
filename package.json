@@ -16,11 +16,13 @@
   "dependencies": {
     "@typegoose/typegoose": "^7.3.4",
     "@types/chai": "^4.2.12",
+    "@types/country-list": "^2.1.0",
     "@types/geoip-lite": "^1.1.31",
     "@types/mocha": "^8.0.3",
     "@types/ws": "^7.2.6",
     "axios": "^0.20.0",
     "chai": "^4.2.0",
+    "country-list": "^2.2.0",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

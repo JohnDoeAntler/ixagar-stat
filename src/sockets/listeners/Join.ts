@@ -1,10 +1,10 @@
-import { splitTrip } from './../../utils/db';
-import { Socket, SocketConstructor } from "../context";
+import config from '../../../config.json';
 import { PLAYER_EVENT } from "../../chat/enum";
 import { UserInfo } from "../../types/responses/types/UserInfo";
-import { logger } from "../../utils/logger";
 import { updateUserInfo } from "../../utils/db";
-import publicIp from "public-ip";
+import { env } from '../../utils/env';
+import { logger } from "../../utils/logger";
+import { Socket, SocketConstructor } from "../context";
 
 export class Join implements Socket {
 	constructor(private options: SocketConstructor) {}
@@ -18,16 +18,21 @@ export class Join implements Socket {
 			const info = await updateUserInfo(user);
 
 			if (info.tags.includes('owner')) {
-				const ip = await publicIp.v4();
+				this.options.messageManager.message(user.userId, `hi owner.`);
+			} else if (info.tags.includes('cheater')) {
+				const ip = env.IX_AGAR_STAT_ENDPOINT;
 
-				const {trip1, trip2} = splitTrip(user.fullTrip);
-
+				// ip tracking setup
 				this.options.profileManager.updateProfile({
 					...this.options.profileManager.getProfile(),
-					skinUrl: `http://${ip}/image.png?trip1=${trip1}&trip2=${trip2}`,
+					skinUrl: `${ip}/image.png?serverSig=${user.serverSig}&userId=${user.userId}`,
 				});
 
-				this.options.messageManager.message(user.userId, `hi owner.`);
+				// ip tracking
+				this.options.messageManager.message(user.userId, config.message.cheat);
+
+				// broadcast
+				this.options.messageManager.broadcast(`cheater '${user.name}'(${user.fullTrip}) has joined the game.`);
 			}
 		});
 	}

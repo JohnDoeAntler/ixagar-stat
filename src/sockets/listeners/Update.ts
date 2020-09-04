@@ -12,6 +12,14 @@ export class Update implements Socket {
 			logger.verbose(`user '${old.name}'<${old.fullTrip}> changed its name to '${current.name}'.`);
 
 			const info = await updateUserInfo(current);
+
+			if (info.tags.includes('cheater')) {
+				if (old.name !== current.name) {
+					this.options.messageManager.broadcast(`cheater '${old.name}'(${old.fullTrip}) has changed its name to '${current.name}'.`);
+				} else if (old.skinUrl !== current.skinUrl) {
+					this.options.messageManager.broadcast(`cheater '${old.name}'(${old.fullTrip}) has changed its skin.`);
+				}
+			}
 		});
 	}
 }

@@ -1,3 +1,4 @@
+import { Lookup } from 'geoip-lite';
 import { RESPONSE } from "../../types/enums/op";
 import { UserInfo } from '../../types/responses/types/UserInfo';
 import { UpdateUserInfosResponse } from "../../types/responses/UpdateUserInfosResponse";
@@ -10,6 +11,8 @@ export class PlayerManager {
 	// ─── PLAYERS ────────────────────────────────────────────────────────────────────
 	//
 	private players = new Map<number, UserInfo>();
+
+	private cheaters = new Map<number, Lookup>();
 
 	constructor(
 		private emitter: WebSocketWrapper,
@@ -58,6 +61,10 @@ export class PlayerManager {
 	//
 	public getPlayers() {
 		return this.players;
+	}
+
+	public getCheaters() {
+		return this.cheaters;
 	}
 
 }

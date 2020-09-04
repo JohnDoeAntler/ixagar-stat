@@ -1,3 +1,4 @@
+import { Interval } from './listeners/Interval';
 import { WebSocketWrapper } from "../chat";
 import { MessageManager } from "../chat/managers/message";
 import { PlayerManager } from "../chat/managers/player";
@@ -59,6 +60,7 @@ export class ChatServerHandler {
 				Leave,
 				Open,
 				Update,
+				Interval,
 			]);
 
 			this.servers.set(serverSig, ctor);
