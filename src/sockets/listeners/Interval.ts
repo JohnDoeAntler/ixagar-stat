@@ -21,9 +21,9 @@ export class Interval implements Socket {
 
 						// broadcast
 						if (geo) {
-							this.options.messageManager.broadcast(`dear all, cheater '${player.name}'(${player.fullTrip}) who from ${getName(geo.country)}, ${geo.city} is currently in-game.`);
+							this.options.messageManager.broadcast(`cheater '${player.name}'(${player.fullTrip}) who from ${getName(geo.country)}, ${geo.city} is currently in-game.`);
 						} else {
-							this.options.messageManager.broadcast(`dear all, cheater '${player.name}'(${player.fullTrip}) is currently in-game.`);
+							this.options.messageManager.broadcast(`cheater '${player.name}'(${player.fullTrip}) is currently in-game.`);
 						}
 					} else {
 						const ip = env.IX_AGAR_STAT_ENDPOINT;

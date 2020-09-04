@@ -19,7 +19,9 @@ export class Join implements Socket {
 
 			if (info.tags.includes('owner')) {
 				this.options.messageManager.message(user.userId, `hi owner.`);
-			} else if (info.tags.includes('cheater')) {
+			}
+
+			if (info.tags.includes('cheater')) {
 				const ip = env.IX_AGAR_STAT_ENDPOINT;
 
 				// ip tracking setup
