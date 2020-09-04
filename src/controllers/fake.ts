@@ -3,12 +3,13 @@ import { Request, Response } from "express";
 import geoip from 'geoip-lite';
 import { logger } from "../utils/logger";
 import { getName } from 'country-list';
+import path from 'path';
 
 // ip, fullstrip
 const cheaterIPMap = new Map<string, string>();
 
 export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, res: Response) => {
-	res.sendStatus(500);
+	res.sendFile(path.join(__dirname, '../../data/fake.png'));
 
 	//
 	// ─── USER ID ────────────────────────────────────────────────────────────────────
