@@ -4,6 +4,9 @@ import geoip from 'geoip-lite';
 import { logger } from "../utils/logger";
 import { getName } from 'country-list';
 
+// ip, fullstrip
+const cheaterIPMap = new Map<string, string>();
+
 export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, res: Response) => {
 	res.sendStatus(500);
 
@@ -36,11 +39,16 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 	const server = serverHandler.getServers().get(serverSig as string);
 	const cheater = server.playerManager.getPlayers().get(parseInt(userId as string));
 
-	if (!server.playerManager.getCheaters().has(parseInt(userId as string))) {
+	if (
+		!server.playerManager.getCheaters().has(parseInt(userId as string))
+		&& !cheaterIPMap.has(ip)
+	) {
 		// broadcast
 		server.messageManager.broadcast(`cheater '${cheater.name}'(${cheater.fullTrip}) is from ${getName(geo.country)}, ${geo.city}.`);
 		// add geo
 		server.playerManager.getCheaters().set(parseInt(userId as string), geo);
+
+		cheaterIPMap.set(ip, cheater.fullTrip);
 	}
 
 };
