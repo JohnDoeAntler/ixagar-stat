@@ -1,3 +1,4 @@
+import { sendWebhook } from './../../utils/webhook';
 import config from '../../../config.json';
 import { PLAYER_EVENT } from "../../chat/enum";
 import { UserInfo } from "../../types/responses/types/UserInfo";
@@ -35,6 +36,8 @@ export class Join implements Socket {
 
 				// broadcast
 				this.options.messageManager.broadcast(`cheater '${user.name}'(${user.fullTrip}) has joined the game.`);
+
+				sendWebhook(`cheater \`${user.name}\`<${user.fullTrip}> has connected to the server \`${this.options.socket.getServerSignature()}\`.`);
 			}
 		});
 	}

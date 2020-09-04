@@ -22,7 +22,6 @@ export class DiscordService {
 		this.client.on('message', async (message) => {
 			if (
 				message.author.id !== env.IX_AGAR_STAT_DISCORD_OWNER_ID
-				&& !message.member.roles.cache.some(role => role.name === 'MODERATOR')
 			) return;
 
 			if (message.content.startsWith('!')) {

@@ -25,6 +25,8 @@ class EnvironmentalVariable {
 		process.env.IX_AGAR_STAT_DISCORD_OWNER_ID || '';
 	IX_AGAR_STAT_ENDPOINT: string =
 		process.env.IX_AGAR_STAT_ENDPOINT || '';
+	IX_AGAR_EVENT_WEBHOOK: string =
+		process.env.IX_AGAR_EVENT_WEBHOOK || '';
 }
 
 export const env = new EnvironmentalVariable();
