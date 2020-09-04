@@ -1,3 +1,4 @@
+import { env } from './../../utils/env';
 import config from '../../../config.json';
 import { RESPONSE } from '../../types/enums/op';
 import { UserInfo } from '../../types/requests/types/UserInfo';
@@ -26,7 +27,7 @@ export class ProfileManager {
 				name: config.profile.name,
 				team: "",
 				code: "",
-				skinUrl: "",
+				skinUrl: `${env.IX_AGAR_STAT_ENDPOINT}/image.png`,
 				envSig: "",
 				profileComment: config.profile.description,
 				showTripKey: false,
