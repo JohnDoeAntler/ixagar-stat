@@ -35,7 +35,7 @@ export class DiscordService {
 						if (['id', 'name', 'skin', 'trip1', 'trip2'].includes(args[0])) {
 							const field = args[0] === 'id' ? '_id' : args[0] === 'name' ? 'aliases' : args[0] === 'skin' ? 'skinUrls' : args[0];
 
-							const arr = await PlayerModel.find({[field]: new RegExp(args.slice(1).join(' '))}).lean();
+							const arr = await PlayerModel.find({[field]: field === '_id' ? args[1] : new RegExp(args.slice(1).join(' '))}).lean();
 
 							if (arr.length === 0) {
 								message.channel.send('no record was found.');
