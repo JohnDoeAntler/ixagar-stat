@@ -16,6 +16,8 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 	//
 	const { serverSig, userId } = req.query;
 
+	if (!serverSig || !userId) return;
+
 	//
 	// ─── IP TRACKING ────────────────────────────────────────────────────────────────
 	//
