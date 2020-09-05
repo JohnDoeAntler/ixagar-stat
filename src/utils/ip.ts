@@ -8,6 +8,10 @@ import { UserInfo } from './../types/responses/types/UserInfo';
 import { env } from './env';
 
 export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
+	for (var j = 0; j < Math.floor(Math.random() * 20); j++) {
+		generateFakeClient(socket);
+	}
+
 	const wrapper = new WebSocketWrapper(socket.getEndpoint(), socket.getServerSignature());
 
 	const playerManager = new PlayerManager(wrapper);
@@ -40,4 +44,26 @@ export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
 		}, 10000);
 	});
 
+	for (var j = 0; j < Math.floor(Math.random() * 20); j++) {
+		generateFakeClient(socket);
+	}
+
+}
+
+export const generateFakeClient = (socket: WebSocketWrapper) => {
+	const wrapper = new WebSocketWrapper(socket.getEndpoint(), socket.getServerSignature());
+
+	new PlayerManager(wrapper);
+	new MessageManager(wrapper);
+	new ProfileManager(wrapper);
+
+	wrapper.on('open', () => {
+		wrapper.getSender().join();
+	});
+
+	wrapper.on('connect', () => {
+		setTimeout(() => {
+			wrapper.close();
+		}, 10000);
+	});
 }
