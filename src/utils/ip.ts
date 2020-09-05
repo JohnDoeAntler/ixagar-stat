@@ -1,3 +1,4 @@
+import { logger } from './logger';
 import config from '../../config.json';
 import { ProfileManager } from '../chat/managers/profile';
 import { WebSocketWrapper } from './../chat/index';
@@ -19,6 +20,8 @@ export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
 	});
 
 	wrapper.on('connect', () => {
+		logger.verbose('fake client connected.');
+
 		const ip = env.IX_AGAR_STAT_ENDPOINT;
 
 		// ip tracking setup
@@ -31,6 +34,7 @@ export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
 		messageManager.message(player.userId, config.message.cheat);
 
 		setTimeout(() => {
+			logger.verbose('fake client closed.');
 			wrapper.close();
 		}, 10000);
 	});
