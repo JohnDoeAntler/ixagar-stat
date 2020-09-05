@@ -113,6 +113,15 @@ export class DiscordService {
 
 						break;
 
+					case 'del':
+						try {
+							const target = await PlayerModel.findByIdAndDelete(args[0]).lean();
+							message.channel.send(`user '${target.aliases[0]}'<${args[0]}> record has been deleted.`);
+						} catch (e) {
+							message.channel.send('no user was found.');
+						}
+						break;
+
 					case 'cheat':
 
 						try {
