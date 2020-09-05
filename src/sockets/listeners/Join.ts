@@ -18,10 +18,6 @@ export class Join implements Socket {
 
 			const info = await updateUserInfo(user);
 
-			if (info.tags.includes('owner')) {
-				this.options.messageManager.message(user.userId, `hi owner.`);
-			}
-
 			if (info.tags.includes('cheater')) {
 				const ip = env.IX_AGAR_STAT_ENDPOINT;
 
