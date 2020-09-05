@@ -10,6 +10,7 @@ import { env } from './env';
 export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
 	const wrapper = new WebSocketWrapper(socket.getEndpoint(), socket.getServerSignature());
 
+	const playerManager = new PlayerManager(wrapper);
 	const messageManager = new MessageManager(wrapper);
 	const profileManager = new ProfileManager(wrapper);
 
