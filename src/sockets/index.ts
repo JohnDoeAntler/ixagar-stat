@@ -54,12 +54,14 @@ export class ChatServerHandler {
 			const context = new Context(ctor);
 
 			context.execute([
-				Chat,
+				Open,
 				Connect,
+				// player event
 				Join,
 				Leave,
-				Open,
 				Update,
+				Chat,
+				// service
 				Interval,
 			]);
 
