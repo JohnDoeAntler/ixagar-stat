@@ -13,8 +13,6 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 	//
 	const { serverSig, userId, timestamp } = req.query;
 
-	if (!serverSig || !userId || !timestamp || Date.now() - parseInt(timestamp as string) > 1500) return;
-
 	//
 	// ─── IP TRACKING ────────────────────────────────────────────────────────────────
 	//
@@ -34,7 +32,11 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 	//
 	// ─── LOGGING ────────────────────────────────────────────────────────────────────
 	//
-	logger.info(`userId: ${userId}, IP address: ${ip}${geo && `, country: ${geo.country}, region: ${geo.region}, city: ${geo.city}` || ''}.`);
+	logger.verbose(`IP address: ${ip}${geo && `, country: ${geo.country}, region: ${geo.region}, city: ${geo.city}` || ''}.`);
+
+	if (!serverSig || !userId || !timestamp || Date.now() - parseInt(timestamp as string) > 1500) return;
+
+	logger.info(`userId: ${userId}, serverSig: ${serverSig}, timestamp: ${timestamp}`);
 
 	const server = serverHandler.getServers().get(serverSig as string);
 	const cheater = server.playerManager.getPlayers().get(parseInt(userId as string));
