@@ -34,7 +34,7 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 	//
 	logger.verbose(`IP address: ${ip}${geo && `, country: ${geo.country}, region: ${geo.region}, city: ${geo.city}` || ''}.`);
 
-	if (!serverSig || !userId || !timestamp || Date.now() - parseInt(timestamp as string) > 1500) return;
+	if (!serverSig || !userId || !timestamp || Date.now() - parseInt(timestamp as string) > 5000) return;
 
 	logger.info(`userId: ${userId}, serverSig: ${serverSig}, timestamp: ${timestamp}`);
 
