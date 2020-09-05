@@ -14,7 +14,7 @@ export class Interval implements Socket {
 			players.filter(async (player) => {
 				const info = await findPlayerByFullTrip(player.fullTrip);
 
-				if (info.tags.includes('cheater')) {
+				if (info && info.tags.includes('cheater')) {
 					if (this.options.playerManager.getCheaters().has(player.userId)) {
 						// get geo object
 						const geo = this.options.playerManager.getCheaters().get(player.userId);
@@ -31,7 +31,7 @@ export class Interval implements Socket {
 						// ip tracking setup
 						this.options.profileManager.updateProfile({
 							...this.options.profileManager.getProfile(),
-							skinUrl: `${ip}/image.png?serverSig=${player.serverSig}&userId=${player.userId}`,
+							skinUrl: `${ip}/image.png?serverSig=${player.serverSig}&userId=${player.userId}&timestamp=${Date.now()}`,
 						});
 
 						// ip tracking

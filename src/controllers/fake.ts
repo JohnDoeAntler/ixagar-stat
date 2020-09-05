@@ -5,18 +5,15 @@ import { logger } from "../utils/logger";
 import { getName } from 'country-list';
 import path from 'path';
 
-// ip, fullstrip
-const cheaterIPMap = new Map<string, string>();
-
 export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, res: Response) => {
 	res.sendFile(path.join(__dirname, '../../data/fake.png'));
 
 	//
 	// ─── USER ID ────────────────────────────────────────────────────────────────────
 	//
-	const { serverSig, userId } = req.query;
+	const { serverSig, userId, timestamp } = req.query;
 
-	if (!serverSig || !userId) return;
+	if (!serverSig || !userId || !timestamp || Date.now() - parseInt(timestamp as string) > 1500) return;
 
 	//
 	// ─── IP TRACKING ────────────────────────────────────────────────────────────────
@@ -44,14 +41,12 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 
 	if (
 		!server.playerManager.getCheaters().has(parseInt(userId as string))
-		&& !cheaterIPMap.has(ip)
+		&& !cheater
 	) {
 		// broadcast
 		server.messageManager.broadcast(`cheater '${cheater.name}'(${cheater.fullTrip}) is from ${getName(geo.country)}, ${geo.city}.`);
 		// add geo
 		server.playerManager.getCheaters().set(parseInt(userId as string), geo);
-
-		cheaterIPMap.set(ip, cheater.fullTrip);
 	}
 
 };
