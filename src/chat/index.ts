@@ -3,15 +3,16 @@ import WebSocket from "ws";
 import { Sender } from './sender';
 
 export class WebSocketWrapper extends EventEmitter {
+
+	private socket: WebSocket;
+
 	private sender: Sender;
 
-	constructor(endpoint: string, private serverSig: string) {
+	constructor(private endpoint: string, private serverSig: string) {
 		super();
 
-		let socket: WebSocket;
-
 		this.sender = new Sender(
-			socket = new WebSocket(endpoint, {
+			this.socket = new WebSocket(endpoint, {
 				origin: "http://ixagar.net",
 			})
 		);
@@ -19,20 +20,20 @@ export class WebSocketWrapper extends EventEmitter {
 		//
 		// ─── WEBSOCKET LISTENERS ─────────────────────────────────────────
 		//
-		socket.onopen = () => {
+		this.socket.onopen = () => {
 			this.emit("open");
 		};
 
-		socket.onmessage = (e) => {
+		this.socket.onmessage = (e) => {
 			const event = JSON.parse(e.data as string);
 			this.emit(event.op, event);
 		};
 
-		socket.onclose = (e) => {
+		this.socket.onclose = (e) => {
 			this.emit("close", e);
 		};
 
-		socket.onerror = (e) => {
+		this.socket.onerror = (e) => {
 			this.emit("error", e);
 		};
 	}
@@ -42,6 +43,13 @@ export class WebSocketWrapper extends EventEmitter {
 	//
 	public getUserId () {
 		return this.sender.getUserId();
+	}
+
+	//
+	// ─── ENDPOINT ───────────────────────────────────────────────────────────────────
+	//
+	public getEndpoint () { 
+		return this.endpoint;
 	}
 
 	//
@@ -56,6 +64,10 @@ export class WebSocketWrapper extends EventEmitter {
 	//
 	public getSender() {
 		return this.sender;
+	}
+
+	public close() {
+		return this.socket.close();
 	}
 
 }
