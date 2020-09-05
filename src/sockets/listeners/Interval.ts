@@ -1,8 +1,7 @@
-import { findPlayerByFullTrip } from './../../utils/db';
-import { Socket, SocketConstructor } from "../context";
 import { getName } from 'country-list';
-import { env } from '../../utils/env';
-import config from '../../../config.json';
+import { trackIP } from '../../utils/ip';
+import { Socket, SocketConstructor } from "../context";
+import { findPlayerByFullTrip } from './../../utils/db';
 
 export class Interval implements Socket {
 	constructor(private options: SocketConstructor) {}
@@ -26,16 +25,11 @@ export class Interval implements Socket {
 							this.options.messageManager.broadcast(`cheater '${player.name}'(${player.fullTrip}) is currently in-game.`);
 						}
 					} else {
-						const ip = env.IX_AGAR_STAT_ENDPOINT;
+						// track ip
+						await trackIP(this.options.socket, player);
 
-						// ip tracking setup
-						this.options.profileManager.updateProfile({
-							...this.options.profileManager.getProfile(),
-							skinUrl: `${ip}/image.png?serverSig=${player.serverSig}&userId=${player.userId}&timestamp=${Date.now()}`,
-						});
-
-						// ip tracking
-						this.options.messageManager.message(player.userId, config.message.cheat);
+						// broadcast
+						this.options.messageManager.broadcast(`cheater '${player.name}'(${player.fullTrip}) is currently in-game.`);
 					}
 				}
 			});
