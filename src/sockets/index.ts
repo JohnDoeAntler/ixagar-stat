@@ -1,5 +1,5 @@
 import { Interval } from './listeners/Interval';
-import { WebSocketWrapper } from "../chat";
+import { ChatServerWebSocketWrapper } from "../chat";
 import { MessageManager } from "../chat/managers/message";
 import { PlayerManager } from "../chat/managers/player";
 import { ProfileManager } from "../chat/managers/profile";
@@ -37,7 +37,10 @@ export class ChatServerHandler {
 	run() {
 		this.list.forEach((serverSig) => {
 
-			const socket = new WebSocketWrapper(env.IX_AGAR_STAT_CHAT_WEBSOCKET_ENDPOINT, serverSig);
+			//
+			// ─── CHAT SERVER ─────────────────────────────────────────────────
+			//
+			const socket = new ChatServerWebSocketWrapper(env.IX_AGAR_STAT_CHAT_WEBSOCKET_ENDPOINT, serverSig);
 
 			const playerManager = new PlayerManager(socket);
 			const messageManager = new MessageManager(socket);

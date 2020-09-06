@@ -3,7 +3,7 @@ import config from '../../../config.json';
 import { RESPONSE } from '../../types/enums/op';
 import { UserInfo } from '../../types/requests/types/UserInfo';
 import { SelfUserIdResponse } from '../../types/responses/SelfUserIdResponse';
-import { WebSocketWrapper } from './../index';
+import { ChatServerWebSocketWrapper } from './../index';
 
 export class ProfileManager {
 
@@ -13,7 +13,7 @@ export class ProfileManager {
 	private profile: UserInfo;
 	
 	constructor(
-		private emitter: WebSocketWrapper,
+		private emitter: ChatServerWebSocketWrapper,
 	) {
 		//
 		// ─── CUSTOMER LISTENERS ──────────────────────────────────────────

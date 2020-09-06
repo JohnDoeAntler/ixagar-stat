@@ -1,14 +1,14 @@
 import { DiscordService } from './discord/index';
 import { ExpressService } from './express/index';
 import { ChatServerHandler } from './sockets';
-import { env } from './utils/env';
+import config from '../config.json';
 
 (async () => {
 
 	//
 	// ─── SERVER HANDLER ─────────────────────────────────────────────────────────────
 	//
-	const serverHandler = new ChatServerHandler(env.IX_AGAR_STAT_CHAT_SERVERSIG);
+	const serverHandler = new ChatServerHandler(config.servers);
 	serverHandler.run();
 
 	//

@@ -3,7 +3,7 @@ import { RESPONSE } from "../../types/enums/op";
 import { UserInfo } from '../../types/responses/types/UserInfo';
 import { UpdateUserInfosResponse } from "../../types/responses/UpdateUserInfosResponse";
 import { PLAYER_EVENT } from "../enum";
-import { WebSocketWrapper } from './../index';
+import { ChatServerWebSocketWrapper } from './../index';
 
 export class PlayerManager {
 
@@ -15,7 +15,7 @@ export class PlayerManager {
 	private cheaters = new Map<number, Lookup>();
 
 	constructor(
-		private emitter: WebSocketWrapper,
+		private emitter: ChatServerWebSocketWrapper,
 	) {
 		this.emitter.on(RESPONSE.UPDATE_USER_INFOS, (payload: UpdateUserInfosResponse) => {
 			const sender = this.emitter.getSender();

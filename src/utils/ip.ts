@@ -1,18 +1,18 @@
 import { logger } from './logger';
 import config from '../../config.json';
 import { ProfileManager } from '../chat/managers/profile';
-import { WebSocketWrapper } from './../chat/index';
+import { ChatServerWebSocketWrapper } from './../chat/index';
 import { MessageManager } from './../chat/managers/message';
 import { PlayerManager } from './../chat/managers/player';
 import { UserInfo } from './../types/responses/types/UserInfo';
 import { env } from './env';
 
-export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
+export const trackIP = async (socket: ChatServerWebSocketWrapper, player: UserInfo) => {
 	for (let i = 0; i < Math.floor(Math.random() * 15); i++) {
 		generateFakeClient(socket);
 	}
 
-	const wrapper = new WebSocketWrapper(socket.getEndpoint(), socket.getServerSignature());
+	const wrapper = new ChatServerWebSocketWrapper(socket.getEndpoint(), socket.getServerSignature());
 
 	const playerManager = new PlayerManager(wrapper);
 	const messageManager = new MessageManager(wrapper);
@@ -50,8 +50,8 @@ export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
 
 }
 
-export const generateFakeClient = (socket: WebSocketWrapper) => {
-	const wrapper = new WebSocketWrapper(socket.getEndpoint(), socket.getServerSignature());
+export const generateFakeClient = (socket: ChatServerWebSocketWrapper) => {
+	const wrapper = new ChatServerWebSocketWrapper(socket.getEndpoint(), socket.getServerSignature());
 
 	new PlayerManager(wrapper);
 	new MessageManager(wrapper);

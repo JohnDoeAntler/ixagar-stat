@@ -1,4 +1,4 @@
-import { WebSocketWrapper } from '..';
+import { ChatServerWebSocketWrapper } from '..';
 import { RESPONSE } from '../../types/enums/op';
 import { UpdatePrivateSessionResponse } from '../../types/responses/UpdatePrivateSessionResponse';
 import { UpdateUserInfosResponse } from '../../types/responses/UpdateUserInfosResponse';
@@ -18,7 +18,7 @@ export class MessageManager {
 	// ─── CONSTRUCTOR ────────────────────────────────────────────────────────────────
 	//		
 	constructor(
-		private emitter: WebSocketWrapper,
+		private emitter: ChatServerWebSocketWrapper,
 	) {
 		this.emitter.on(RESPONSE.UPDATE_USER_INFOS, (payload: UpdateUserInfosResponse) => {
 			if (payload.infos.length === 1) {

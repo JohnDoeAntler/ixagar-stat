@@ -1,4 +1,4 @@
-import { WebSocketWrapper } from '../chat';
+import { ChatServerWebSocketWrapper } from '../chat';
 import { Sender } from '../chat/sender';
 import { MessageManager } from './../chat/managers/message';
 import { PlayerManager } from './../chat/managers/player';
@@ -9,7 +9,7 @@ export interface Socket {
 }
 
 export interface SocketConstructor {
-	socket: WebSocketWrapper;
+	socket: ChatServerWebSocketWrapper;
 	sender: Sender;
 	playerManager: PlayerManager;
 	messageManager: MessageManager;

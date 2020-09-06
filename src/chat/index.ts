@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import WebSocket from "ws";
 import { Sender } from './sender';
 
-export class WebSocketWrapper extends EventEmitter {
+export class ChatServerWebSocketWrapper extends EventEmitter {
 
 	private socket: WebSocket;
 
