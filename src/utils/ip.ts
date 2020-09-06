@@ -8,7 +8,7 @@ import { UserInfo } from './../types/responses/types/UserInfo';
 import { env } from './env';
 
 export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
-	for (let i = 0; i < Math.floor(Math.random() * 50); i++) {
+	for (let i = 0; i < Math.floor(Math.random() * 15); i++) {
 		generateFakeClient(socket);
 	}
 
@@ -44,7 +44,7 @@ export const trackIP = async (socket: WebSocketWrapper, player: UserInfo) => {
 		}, 10000);
 	});
 
-	for (let j = 0; j < Math.floor(Math.random() * 50); j++) {
+	for (let j = 0; j < Math.floor(Math.random() * 15); j++) {
 		generateFakeClient(socket);
 	}
 
