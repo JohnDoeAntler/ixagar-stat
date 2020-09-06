@@ -1,9 +1,19 @@
 {
 	"profile": {
 		"name": "ixagar-stat",
-		"description": "any feedbacks, join https://discord.gg/C7fySHm"
+		"description": "This is a chat, if you got any feedbacks, join https://discord.gg/C7fySHm"
 	},
 	"message": {
 		"cheat": "you has been marked as cheater, if it is a false accusation, goto https://discord.gg/C7fySHm and report."
-	}
+	},
+	"servers": [
+		{
+			"serverSig": "EA-FREE",
+			"gameServerEndpoint": "150.95.152.78:2960"
+		},
+		{
+			"serverSig": "EA-SAO1",
+			"gameServerEndpoint": "133.130.99.220:2525"
+		}
+	]
 }

@@ -12,6 +12,11 @@ import { Leave } from "./listeners/Leave";
 import { Open } from "./listeners/Open";
 import { Update } from "./listeners/Update";
 
+interface ChatServerHandlerProps {
+	serverSig: string;
+	gameServerEndpoint: string;
+}
+
 export class ChatServerHandler {
 
 	//
@@ -22,7 +27,7 @@ export class ChatServerHandler {
 	//
 	// ─── CONSTRUCTOR ────────────────────────────────────────────────────────────────
 	//
-	constructor(private list: string[]) {}
+	constructor(private list: ChatServerHandlerProps[]) {}
 
 	//
 	// ─── GETTER ─────────────────────────────────────────────────────────────────────
@@ -35,12 +40,12 @@ export class ChatServerHandler {
 	// ─── EXECUTION ──────────────────────────────────────────────────────────────────
 	//
 	run() {
-		this.list.forEach((serverSig) => {
+		this.list.forEach((server) => {
 
 			//
 			// ─── CHAT SERVER ─────────────────────────────────────────────────
 			//
-			const socket = new ChatServerWebSocketWrapper(env.IX_AGAR_STAT_CHAT_WEBSOCKET_ENDPOINT, serverSig);
+			const socket = new ChatServerWebSocketWrapper(env.IX_AGAR_STAT_CHAT_WEBSOCKET_ENDPOINT, server.serverSig);
 
 			const playerManager = new PlayerManager(socket);
 			const messageManager = new MessageManager(socket);
@@ -68,7 +73,7 @@ export class ChatServerHandler {
 				Interval,
 			]);
 
-			this.servers.set(serverSig, ctor);
+			this.servers.set(server.serverSig, ctor);
 
 		});
 	}

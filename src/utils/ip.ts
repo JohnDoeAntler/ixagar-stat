@@ -67,3 +67,28 @@ export const generateFakeClient = (socket: ChatServerWebSocketWrapper) => {
 		}, 10000);
 	});
 }
+
+export const fuckSpam = () => {
+	const wrapper = new ChatServerWebSocketWrapper('ws://chat2.ixagar.net:4590', 'EA-FREE');
+
+	new PlayerManager(wrapper);
+	const mm = new MessageManager(wrapper);
+	new ProfileManager(wrapper);
+
+	wrapper.on('open', () => {
+		wrapper.getSender().join();
+	});
+
+	wrapper.on('connect', () => {
+		setTimeout(async () => {
+			while (true) {
+				await new Promise(res => {
+					setTimeout(() => {
+						res();
+					}, 200);
+				})
+				mm.broadcast('could you just stop fucking spamming.');
+			}
+		}, 1000);
+	});
+}
