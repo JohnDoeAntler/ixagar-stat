@@ -46,7 +46,7 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 		&& cheater
 	) {
 		// broadcast
-		server.messageManager.broadcast(`cheater '${cheater.name}'(${cheater.fullTrip}) is from ${getName(geo.country)}, ${geo.city}.`);
+		server.messageManager.broadcast(`cheater '${cheater.name}' is from ${getName(geo.country)}, ${geo.city}.`);
 		// add geo
 		server.playerManager.getCheaters().set(parseInt(userId as string), geo);
 	}

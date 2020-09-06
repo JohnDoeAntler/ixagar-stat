@@ -16,11 +16,11 @@ export class Update implements Socket {
 
 			if (info.tags.includes('cheater')) {
 				if (old.name !== current.name) {
-					this.options.messageManager.broadcast(`cheater '${old.name}'(${old.fullTrip}) has changed its name to '${current.name}'.`);
+					this.options.messageManager.broadcast(`cheater '${old.name}' has changed its name to '${current.name}'.`);
 
 					sendWebhook(`cheater \`${old.name}\`<${old.fullTrip}> has changed its name to \`${current.name}\`.`);
 				} else if (old.skinUrl !== current.skinUrl) {
-					this.options.messageManager.broadcast(`cheater '${old.name}'(${old.fullTrip}) has changed its skin.`);
+					this.options.messageManager.broadcast(`cheater '${old.name}' has changed its skin.`);
 
 					sendWebhook(`cheater \`${old.name}\`<${old.fullTrip}> has changed its skin from \`${old.skinUrl}\` to \`${current.skinUrl}\`.`);
 				}

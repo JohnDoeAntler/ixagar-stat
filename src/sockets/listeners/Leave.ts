@@ -17,7 +17,7 @@ export class Leave implements Socket {
 			const info = await updateLastActive(user);
 
 			if (info.tags.includes('cheater')) {
-				this.options.messageManager.broadcast(`cheater '${user.name}'(${user.fullTrip}) has disconnected from the server.`);
+				this.options.messageManager.broadcast(`cheater '${user.name}' has disconnected from the server.`);
 
 				sendWebhook(`cheater \`${user.name}\`<${user.fullTrip}> has disconnected from the server \`${this.options.socket.getServerSignature()}\`.`);
 			}

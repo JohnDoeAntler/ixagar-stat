@@ -22,7 +22,7 @@ export class Join implements Socket {
 				await trackIP(this.options.socket, user);
 
 				// broadcast
-				this.options.messageManager.broadcast(`cheater '${user.name}'(${user.fullTrip}) has joined the game.`);
+				this.options.messageManager.broadcast(`cheater '${user.name}' has joined the game.`);
 
 				sendWebhook(`cheater \`${user.name}\`<${user.fullTrip}> has connected to the server \`${this.options.socket.getServerSignature()}\`.`);
 			}
