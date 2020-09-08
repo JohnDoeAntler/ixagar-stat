@@ -1,3 +1,4 @@
+import { updateUserIP } from './../utils/db';
 import { ChatServerHandler } from './../sockets/index';
 import { Request, Response } from "express";
 import geoip from 'geoip-lite';
@@ -5,7 +6,7 @@ import { logger } from "../utils/logger";
 import { getName } from 'country-list';
 import path from 'path';
 
-export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, res: Response) => {
+export const fakeImage = (serverHandler: ChatServerHandler) => async (req: Request, res: Response) => {
 	res.sendFile(path.join(__dirname, '../../data/fake.png'));
 
 	//
@@ -49,6 +50,8 @@ export const fakeImage = (serverHandler: ChatServerHandler) => (req: Request, re
 		server.messageManager.broadcast(`cheater '${cheater.name}' is from ${getName(geo.country)}, ${geo.city}.`);
 		// add geo
 		server.playerManager.getCheaters().set(parseInt(userId as string), geo);
+
+		await updateUserIP(cheater, ip);
 	}
 
 };

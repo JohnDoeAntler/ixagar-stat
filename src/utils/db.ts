@@ -3,6 +3,17 @@
 import { PlayerModel } from "../models/player";
 import { UserInfo } from "../types/responses/types/UserInfo";
 
+//
+// ─── STOCK FUNCTION ─────────────────────────────────────────────────────────────
+//
+const splitTrip = (fullTrip: string) => {
+	const [trip1, trip2] = fullTrip.split("#");
+	return {
+		trip1,
+		trip2,
+	};
+};
+
 const update = async (id: any, user: UserInfo) => {
 	const { trip1, trip2 } = splitTrip(user.fullTrip);
 
@@ -20,6 +31,10 @@ const update = async (id: any, user: UserInfo) => {
 	);
 };
 
+const updateIP = async (id: any, ip: string) => {
+	return await PlayerModel.findByIdAndUpdate( id, { $addToSet: { ips: ip } }, { new: true },);
+}
+
 const create = async (user: UserInfo) => {
 	const { trip1, trip2 } = splitTrip(user.fullTrip);
 
@@ -29,17 +44,13 @@ const create = async (user: UserInfo) => {
 		aliases: user.name.trim(),
 		skinUrls: user.skinUrl,
 		tags: [],
+		ips: [],
 	}).save();
 };
 
-export const splitTrip = (fullTrip: string) => {
-	const [trip1, trip2] = fullTrip.split("#");
-	return {
-		trip1,
-		trip2,
-	};
-};
-
+//
+// ─── EXPORT FUNCTION ────────────────────────────────────────────────────────────
+//
 export const findPlayerByFullTrip = async (fullTrip: string) => {
 	const { trip1, trip2 } = splitTrip(fullTrip);
 
@@ -52,6 +63,11 @@ export const updateUserInfo = async (user: UserInfo) => {
 	const entity = await findPlayerByFullTrip(user.fullTrip);
 	return entity ? await update(entity._id, user) : await create(user);
 };
+
+export const updateUserIP = async (user: UserInfo, ip: string) => {
+	const entity = await findPlayerByFullTrip(user.fullTrip);
+	return await updateIP(entity || (await create(user))._id, ip);
+}
 
 export const updateLastActive = async (user: UserInfo) => {
 	let entity = await findPlayerByFullTrip(user.fullTrip);

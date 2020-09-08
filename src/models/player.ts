@@ -34,6 +34,13 @@ const PlayerSchema = new Schema({
 		type: [String],
 		required: true,
 		unique: false,
+		default: [],
+	},
+	ips: {
+		type: [String],
+		required: true,
+		unique: false,
+		default: [],
 	},
 	lastActive: {
 		type: Date,
