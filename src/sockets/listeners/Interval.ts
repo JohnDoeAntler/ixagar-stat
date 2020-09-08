@@ -10,7 +10,7 @@ export class Interval implements Socket {
 		setInterval(async () => {
 			const players = Array.from(this.options.playerManager.getPlayers().values());
 
-			players.filter(async (player) => {
+			await Promise.all(players.map(async (player) => {
 				const info = await findPlayerByFullTrip(player.fullTrip);
 
 				if (info && info.tags.includes('cheater')) {
@@ -32,7 +32,7 @@ export class Interval implements Socket {
 						this.options.messageManager.broadcast(`cheater '${player.name}' is currently in-game.`);
 					}
 				}
-			});
+			}));
 		}, 60000);
 	}
 }
