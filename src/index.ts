@@ -15,12 +15,12 @@ import config from '../config.json';
 	// ─── EXPRESS ────────────────────────────────────────────────────────────────────
 	//
 	const ipTracker = new ExpressService(serverHandler);
-	ipTracker.run();
+	await ipTracker.run();
 
 	//
 	// ─── DISCORD ────────────────────────────────────────────────────────────────────
 	//
 	const client = new DiscordService(serverHandler.getServers());
-	client.run();
+	await client.run();
 
 })();
