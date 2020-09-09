@@ -12,12 +12,12 @@ import { Leave } from "./listeners/Leave";
 import { Open } from "./listeners/Open";
 import { Update } from "./listeners/Update";
 
-interface ChatServerHandlerProps {
+interface IXAgarServerHandlerProps {
 	serverSig: string;
 	gameServerEndpoint: string;
 }
 
-export class ChatServerHandler {
+export class IXAgarServerHandler {
 
 	//
 	// ─── SERVER LIST ────────────────────────────────────────────────────────────────
@@ -27,7 +27,7 @@ export class ChatServerHandler {
 	//
 	// ─── CONSTRUCTOR ────────────────────────────────────────────────────────────────
 	//
-	constructor(private list: ChatServerHandlerProps[]) {}
+	constructor(private list: IXAgarServerHandlerProps[]) {}
 
 	//
 	// ─── GETTER ─────────────────────────────────────────────────────────────────────

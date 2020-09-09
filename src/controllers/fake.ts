@@ -1,12 +1,12 @@
 import { updateUserIP } from './../utils/db';
-import { ChatServerHandler } from './../sockets/index';
+import { IXAgarServerHandler } from './../sockets/index';
 import { Request, Response } from "express";
 import geoip from 'geoip-lite';
 import { logger } from "../utils/logger";
 import { getName } from 'country-list';
 import path from 'path';
 
-export const fakeImage = (serverHandler: ChatServerHandler) => async (req: Request, res: Response) => {
+export const fakeImage = (serverHandler: IXAgarServerHandler) => async (req: Request, res: Response) => {
 	res.sendFile(path.join(__dirname, '../../data/fake.png'));
 
 	//

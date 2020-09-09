@@ -1,4 +1,4 @@
-import { ChatServerHandler } from './../sockets/index';
+import { IXAgarServerHandler } from './../sockets/index';
 import express from 'express';
 import { router } from '../routes';
 import { logger } from '../utils/logger';
@@ -8,7 +8,7 @@ export class ExpressService {
 
 	private server: express.Express;
 
-	constructor(private serverHandler: ChatServerHandler) {
+	constructor(private serverHandler: IXAgarServerHandler) {
 		this.server = express();
 		this.server.use(router(serverHandler));
 	}
