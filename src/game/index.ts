@@ -3,6 +3,7 @@
 import { EventEmitter } from "events";
 import WebSocket from "ws";
 import { DataFrameWriter } from "./DataFrameWriter";
+
 export class GameServerSocketWrapper extends EventEmitter {
 	private socket: WebSocket;
 
