@@ -33,6 +33,6 @@ export class Interval implements Socket {
 					}
 				}
 			}));
-		}, 60000);
+		}, 60000 * 3);
 	}
 }
