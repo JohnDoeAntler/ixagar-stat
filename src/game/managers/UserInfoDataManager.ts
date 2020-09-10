@@ -17,8 +17,9 @@ export class UserInfoDataManager {
 			var i = new DataFrameReader(test);
 
 			switch (i.ReadUint8()) {
-				case 42: 
+				case 42: {
 					const count = i.ReadUint16();
+
 					for (let f = 0; f < count; f++) {
 						// num
 						const num = i.ReadUint16();
@@ -45,24 +46,32 @@ export class UserInfoDataManager {
 						// map user by num
 						this.users.set(num, user);
 					}
+
 					break;
-				case 45:
-					for (let f = 0; f < i.ReadUint16(); f++) {
-						const num = i.ReadUint16();
+				}
+				case 45: {
+						const count = i.ReadUint16();
 
-						// event
-						if (this.users.has(num)) {
-							socket.emit('leave', this.users.has(num));
+						for (let f = 0; f < count; f++) {
+							const num = i.ReadUint16();
 
-							// update map
-							this.users.delete(num);
+							// event
+							if (this.users.has(num)) {
+								socket.emit('leave', this.users.has(num));
+
+								// update map
+								this.users.delete(num);
+							}
 						}
+
+						break;
 					}
-					break;
-				case 41:
+				case 41: {
 					this.map.clear();
 
-					for (let f = 0; f < i.ReadUint16(); f++) {
+					const count = i.ReadUint16();
+
+					for (let f = 0; f < count; f++) {
 
 						const playerId = i.ReadUint16();
 						const x = i.ReadInt16();
@@ -76,7 +85,9 @@ export class UserInfoDataManager {
 							mass,
 						});
 					}
+
 					break;
+				}
 			}
 		});
 	}
