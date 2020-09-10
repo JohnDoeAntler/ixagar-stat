@@ -9,11 +9,11 @@
 	"servers": [
 		{
 			"serverSig": "EA-FREE",
-			"gameServerEndpoint": "150.95.152.78:2960"
+			"gameServerEndpoint": "ws://150.95.152.78:2960"
 		},
 		{
 			"serverSig": "EA-SAO1",
-			"gameServerEndpoint": "133.130.99.220:2525"
+			"gameServerEndpoint": "ws://133.130.99.220:2525"
 		}
 	]
 }
