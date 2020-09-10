@@ -62,7 +62,7 @@ export class Sender {
 	//
 	private start: number = -1;
 
-	private readonly SEND_DELAY: number = 600;
+	private readonly SEND_DELAY: number = 1000;
 
 	public async send(val: any) {
 		const diff = Date.now() - this.start;
