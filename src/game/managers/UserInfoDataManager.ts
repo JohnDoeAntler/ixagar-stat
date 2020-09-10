@@ -18,7 +18,8 @@ export class UserInfoDataManager {
 
 			switch (i.ReadUint8()) {
 				case 42: 
-					for (let f = 0; f < i.ReadUint16(); f++) {
+					const count = i.ReadUint16();
+					for (let f = 0; f < count; f++) {
 						// num
 						const num = i.ReadUint16();
 
@@ -50,16 +51,19 @@ export class UserInfoDataManager {
 						const num = i.ReadUint16();
 
 						// event
-						socket.emit('leave', this.users.get(num));
+						if (this.users.has(num)) {
+							socket.emit('leave', this.users.has(num));
 
-						// update map
-						this.users.delete(num);
+							// update map
+							this.users.delete(num);
+						}
 					}
 					break;
 				case 41:
 					this.map.clear();
 
 					for (let f = 0; f < i.ReadUint16(); f++) {
+
 						const playerId = i.ReadUint16();
 						const x = i.ReadInt16();
 						const y = i.ReadInt16();
