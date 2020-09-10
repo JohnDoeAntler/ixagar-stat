@@ -80,6 +80,7 @@ export class UserInfoDataManager {
 
 						this.map.set(playerId, {
 							user: this.users.get(playerId),
+							playerId,
 							x,
 							y,
 							mass,
