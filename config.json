@@ -15,5 +15,6 @@
 			"serverSig": "EA-SAO1",
 			"gameServerEndpoint": "ws://133.130.99.220:2525"
 		}
-	]
+	],
+	"bot_secret_alias": "o66QOfuSVtFBzooz6PO4mx0rKdP7oIWLMtLHfYvDbnbEjw"
 }
