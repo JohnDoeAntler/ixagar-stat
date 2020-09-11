@@ -1,16 +1,16 @@
-import { Interval } from './listeners/Interval';
 import { ChatServerWebSocketWrapper } from "../chat";
 import { MessageManager } from "../chat/managers/message";
 import { PlayerManager } from "../chat/managers/player";
 import { ProfileManager } from "../chat/managers/profile";
 import { env } from "../utils/env";
-import { SocketConstructor, Context } from "./context";
-import { Chat } from "./listeners/Chat";
-import { Connect } from "./listeners/Connect";
-import { Join } from "./listeners/Join";
-import { Leave } from "./listeners/Leave";
-import { Open } from "./listeners/Open";
-import { Update } from "./listeners/Update";
+import { Context, SocketConstructor } from "./chat/context";
+import { Chat } from "./chat/listeners/Chat";
+import { Connect } from "./chat/listeners/Connect";
+import { Interval } from "./chat/listeners/Interval";
+import { Join } from "./chat/listeners/Join";
+import { Leave } from "./chat/listeners/Leave";
+import { Open } from "./chat/listeners/Open";
+import { Update } from "./chat/listeners/Update";
 
 interface IXAgarServerHandlerProps {
 	serverSig: string;
