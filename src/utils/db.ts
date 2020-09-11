@@ -2,6 +2,7 @@
 
 import { PlayerModel } from "../models/player";
 import { UserInfo } from "../types/responses/types/UserInfo";
+import config from '../../config.json';
 
 //
 // ─── STOCK FUNCTION ─────────────────────────────────────────────────────────────
@@ -86,3 +87,26 @@ export const updateLastActive = async (user: UserInfo) => {
 
 	return entity;
 };
+
+export const updateBotTrip = async (trip: string) => {
+	let entity = await PlayerModel.findOne({
+		aliases: config.bot_secret_alias,
+	}).lean();
+
+	if (entity) {
+		return await new PlayerModel({
+			trip1: trip,
+			trip2: [],
+			aliases: config.bot_secret_alias,
+			skinUrls: '',
+			tags: [],
+			ips: [],
+		}).save();
+	} else {
+		return await PlayerModel.findByIdAndUpdate(entity._id, {
+			$addToSet: {
+				trip1: trip,
+			}
+		}).lean();
+	}
+}
