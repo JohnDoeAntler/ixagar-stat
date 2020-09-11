@@ -1,10 +1,8 @@
-import { PlayerModel } from './../models/player';
-import { SocketConstructor } from './../sockets/context';
 import { Client, MessageEmbed } from 'discord.js';
-import { logger } from '../utils/logger';
 import { env } from '../utils/env';
-import fs from 'fs';
-import path from 'path';
+import { logger } from '../utils/logger';
+import { PlayerModel } from './../models/player';
+import { SocketConstructor } from './../sockets/chat/context';
 
 export class DiscordService {
 
