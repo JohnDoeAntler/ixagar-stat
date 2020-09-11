@@ -18,37 +18,37 @@ export class UserInfoDataManager {
 
 			switch (i.ReadUint8()) {
 				case 42: {
-					const count = i.ReadUint16();
+						const count = i.ReadUint16();
 
-					for (let f = 0; f < count; f++) {
-						// num
-						const num = i.ReadUint16();
+						for (let f = 0; f < count; f++) {
+							// num
+							const num = i.ReadUint16();
 
-						// model
-						const user = {
-							num,
-							name: i.ReadStringEx(),
-							team: i.ReadStringEx(),
-							skinUrl1: i.ReadStringEx(),
-							isBot: i.ReadUint8() > 0,
-							teamId: i.ReadUint16(),
-							trip: i.ReadStringEx(),
-							skinUrl2: i.ReadStringEx(),
-						};
+							// model
+							const user = {
+								num,
+								name: i.ReadStringEx(),
+								team: i.ReadStringEx(),
+								skinUrl1: i.ReadStringEx(),
+								isBot: i.ReadUint8() > 0,
+								teamId: i.ReadUint16(),
+								trip: i.ReadStringEx(),
+								skinUrl2: i.ReadStringEx(),
+							};
 
-						// event
-						if (this.users.has(num)) {
-							socket.emit('change', this.users.get(num), user);
-						} else {
-							socket.emit('join', user);
+							// event
+							if (this.users.has(num)) {
+								socket.emit('change', this.users.get(num), user);
+							} else {
+								socket.emit('join', user);
+							}
+
+							// map user by num
+							this.users.set(num, user);
 						}
 
-						// map user by num
-						this.users.set(num, user);
+						break;
 					}
-
-					break;
-				}
 				case 45: {
 						const count = i.ReadUint16();
 
